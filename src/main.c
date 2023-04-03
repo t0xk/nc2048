@@ -18,12 +18,16 @@
 
 #define randFieldCoordinate() randInt(SIZE - 1)
 
+/* Defining the Field type */
+typedef int Field[SIZE][SIZE];
+
 WINDOW *fieldWindow;
 WINDOW *scoreWindow;
 
 int score = 0;
 int maxBlock = 0;
-int field[SIZE][SIZE];
+Field field;
+//int field[SIZE][SIZE];
 
 /**
  *
@@ -41,7 +45,7 @@ void handleInput(int charCode);
  * Draws the field to the screen.
  * @param _field
  */
-void drawField(int _field[SIZE][SIZE]);
+void drawField(Field _field);
 
 /**
  * Returns a uniform-length character array representing a block on the field.
@@ -71,32 +75,32 @@ void joinBlocks(int *block1, int *block2);
  * Moves and joins(where applicable) field blocks to the <i>left</i>.
  * @param _field Field we're iterating.
  */
-int moveFieldLeft(int _field[SIZE][SIZE]);
+int moveFieldLeft(Field _field);
 
 /**
  * Moves and joins(where applicable) field blocks to the <i>right</i>.
  * @param _field Field we're iterating.
  */
-int moveFieldRight(int _field[SIZE][SIZE]);
+int moveFieldRight(Field _field);
 
 /**
  * Moves and joins(where applicable) field blocks <i>up</i>.
  * @param _field Field we're iterating.
  */
-int moveFieldUp(int _field[SIZE][SIZE]);
+int moveFieldUp(Field _field);
 
 /**
  * Moves and joins(where applicable) field blocks <i>down</i>.
  * @param _field Field we're iterating.
  */
-int moveFieldDown(int _field[SIZE][SIZE]);
+int moveFieldDown(Field _field);
 
 /**
  * Checks to see if all values in the field are non-zero
  * @param _field
  * @return
  */
-int isFieldFull(int _field[SIZE][SIZE]);
+int isFieldFull(Field _field);
 
 /**
  * Safely converts 64bit long into 32bit int
@@ -116,7 +120,7 @@ int randInt(int upperLimit);
  * Populates a random block on the field.
  * @param _field
  */
-void populateRandomBlock(int _field[SIZE][SIZE]);
+void populateRandomBlock(Field _field);
 
 /**
  * Calculates the power over the base
@@ -153,7 +157,7 @@ void stop();
  *  - Spawns 2 blocks in random location
  * @param _field
  */
-void initField(int _field[SIZE][SIZE]);
+void initField(Field _field);
 
 int main() {
     /*  Initialization  */
@@ -249,6 +253,7 @@ void drawDebug(char *out) {
  */
 void drawScore() {
     werase(scoreWindow);
+    box(scoreWindow, 0, 0);
     wmove(scoreWindow, 1, 1);
     wprintw(scoreWindow, "Score:");
 
@@ -266,7 +271,7 @@ void drawScore() {
     wprintw(scoreWindow, " %s", MaxStr);
 }
 
-void drawField(int _field[SIZE][SIZE]) {
+void drawField(Field _field) {
 #define START_Y 1
 #define START_X 1
     drawScore();
@@ -342,7 +347,7 @@ void handleInput(int charCode) {
     }
 }
 
-int moveFieldLeft(int _field[SIZE][SIZE]) {
+int moveFieldLeft(Field _field) {
 #define BLOCK_Y_START 0
 #define BLOCK_X_START 1
 #define FIRST_BLOCK 0
@@ -404,7 +409,7 @@ int moveFieldLeft(int _field[SIZE][SIZE]) {
 #undef LAST_BLOCK
 }
 
-int moveFieldRight(int _field[SIZE][SIZE]) {
+int moveFieldRight(Field _field) {
 #define BLOCK_Y_START 0
 #define BLOCK_X_START (SIZE - 2)
 #define LAST_BLOCK (SIZE - 1)
@@ -452,7 +457,7 @@ int moveFieldRight(int _field[SIZE][SIZE]) {
 #undef LAST_BLOCK
 }
 
-int moveFieldUp(int _field[SIZE][SIZE]) {
+int moveFieldUp(Field _field) {
 #define BLOCK_X_START 0
 #define BLOCK_Y_START 1
 #define FIRST_BLOCK 0
@@ -514,7 +519,7 @@ int moveFieldUp(int _field[SIZE][SIZE]) {
 #undef LAST_BLOCK
 }
 
-int moveFieldDown(int _field[SIZE][SIZE]) {
+int moveFieldDown(Field _field) {
 #define BLOCK_X_START 0
 #define BLOCK_Y_START (SIZE - 2)
 #define LAST_BLOCK (SIZE - 1)
@@ -578,7 +583,7 @@ int randInt(int upperLimit) {
 }
 
 // TODO: improve the efficiency, when the amount of free blocks grows
-void populateRandomBlock(int _field[SIZE][SIZE]) {
+void populateRandomBlock(Field _field) {
     int randY;
     int randX;
 
@@ -616,7 +621,7 @@ int power(int base, int power) {
     return out;
 }
 
-int isFieldFull(int _field[SIZE][SIZE]) {
+int isFieldFull(Field _field) {
     for (int i = 0; i < SIZE; i++) {
         for (int j = 0; j < SIZE; j++) {
             if (_field[i][j] == 0)
@@ -667,13 +672,13 @@ void reset() {
  * Sets all the values in the field to 0, effectively clearing it of all blocks.
  * @param _field
  */
-void emptyField(int _field[SIZE][SIZE]) {
+void emptyField(Field _field) {
     for (int i = 0; i < SIZE; i++)
         for (int j = 0; j < SIZE; j++)
             _field[i][j] = 0;
 }
 
-void initField(int _field[SIZE][SIZE]) {
+void initField(Field _field) {
 #define FIELD_SIZE (SIZE * SIZE * sizeof(int))
     emptyField(_field);
 
@@ -746,6 +751,7 @@ WINDOW *drawLoss() {
  */
 void refreshScreen() {
     drawField(field);
+    box(fieldWindow, 0, 0);
     wrefresh(fieldWindow);
     wrefresh(scoreWindow);
     refresh();
