@@ -1,4 +1,7 @@
-![nc2048 logo](/res/nc2048_logo.png)  
+<p align="center">
+  <img width="600" height="200" src="/res/nc2048_logo.png">
+</p>
+
 *ncurses 2048* or *nc2048* is a C implementation of the popular mobile game called '2048'. It is designed to be played
 in a Terminal. The project was tested on Ubuntu 22.10 and Ubuntu for WSL2.
 
@@ -10,6 +13,20 @@ in a Terminal. The project was tested on Ubuntu 22.10 and Ubuntu for WSL2.
 * `cmake` version *3.10* or later,
 * `ncruses` library, an installation guide is
   available [here](https://www.cyberciti.biz/faq/linux-install-ncurses-library-headers-on-debian-ubuntu-centos-fedora/).
+
+#### Building the project
+
+```shell
+mkdir nc2048 && cd nc2048
+git init
+git pull https://github.com/VolgemutNik/nc2048.git
+cmake -S . -B build
+cd build
+make
+
+# Run the project
+./nc2048
+```
 
 #### Proposed improvements
 
