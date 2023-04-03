@@ -23,13 +23,7 @@ WINDOW *scoreWindow;
 
 int score = 0;
 int maxBlock = 0;
-int field[SIZE][SIZE] =
-        {
-                {1, 1, 2,  1},
-                {2, 1, 2,  2},
-                {1, 2, 1,  2},
-                {2, 1, 2, 1}
-        };
+int field[SIZE][SIZE];
 
 /**
  *
@@ -164,7 +158,7 @@ void initField(int _field[SIZE][SIZE]);
 int main() {
     /*  Initialization  */
     srandom(time(NULL));
-    // TODO: Remove comment -- initField(field);
+    initField(field);
 
     /*  Setting up ncurses. */
     initscr();              /*  Initializes the ncurses screen.               */
@@ -583,7 +577,7 @@ int randInt(int upperLimit) {
     return retval;
 }
 
-// TODO: Remove debug, make it more efficient if there's very little free spaces
+// TODO: improve the efficiency, when the amount of free blocks grows
 void populateRandomBlock(int _field[SIZE][SIZE]) {
     int randY;
     int randX;
