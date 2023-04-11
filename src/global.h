@@ -9,4 +9,7 @@
 #define MAX_BLOCK_SIZE 11
 #define MAX_BLOCK_VALUE 2048
 
+#define true 1
+#define false 0
+
 #endif //NC2048_GLOBAL_H

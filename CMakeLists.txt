@@ -7,5 +7,5 @@ set(CMAKE_CXX_FLAGS "-lncurses")
 
 find_package(Curses REQUIRED)
 include_directories(${CURSES_INCLUDE_DIR})
-add_executable(nc2048 src/main.c  src/global.h)
+add_executable(nc2048 src/main.c  src/global.h src/field.c src/field.h src/random.c src/random.h src/score.c src/score.h)
 target_link_libraries(nc2048 ${CURSES_LIBRARIES})
