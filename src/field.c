@@ -334,3 +334,25 @@ int isFieldFull(Field _field) {
 
     return true;
 }
+
+/**
+ * Checks to see if a block in the field can be moved.
+ * @param _field
+ * @return true(1) if field can be moved, false(0) otherwise
+ */
+int isFieldMovable(Field _field) {
+#define FIELD_MAX (SIZE - 1)
+    for (int i = 0; i < SIZE; i++) {
+        for (int j = 0; j < FIELD_MAX; j++) {
+            int block = _field[i][j];
+            int blockRight = _field[i][j + 1];
+            int blockDown = (i != FIELD_MAX) ? _field[i + 1][j] : -1;
+
+            if (block == blockRight || block == blockDown)
+                return true;
+        }
+    }
+
+    return false;
+#undef FIELD_MAX
+}

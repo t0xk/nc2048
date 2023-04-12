@@ -32,9 +32,6 @@ make
 
 * The `populateRandomBlock` gets inefficient when the field fills up, since it re-generates a random x and y coordinate
   for the block until it finds one that is empty. We plan to improve this in the future.
-* The current *losing* condition is not identical to the one in the original game. The current implementation only
-  checks if every field block is occupied. A secondary check has to be added that assures none of the blocks can be
-  *joined*.
 * The rendering and game logic should be executed on separate threads.
 
 #### Screenshots

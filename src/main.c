@@ -244,14 +244,14 @@ void handleInput(int charCode) {
         }
 
         populateRandomBlock(field);
+        
         /* Handle losing condition - 'Are all the blocks on the field taken?'*/
-        /*  TODO: Improve loss condition
-         *      -> We only lose if we run out of possible move, a check is needed to ensure that is the case
-         */
         if (isFieldFull(field) == true) {
-            handlePopupWindow(LOSS_WINDOW_ID);
-            drawDebug("Oh no... You lost.");
-            return;
+            if (isFieldMovable(field) == false) {
+                handlePopupWindow(LOSS_WINDOW_ID);
+                drawDebug("Oh no... You lost.");
+                return;
+            }
         }
 
         /* Only redraw if there was a change on the field */
