@@ -121,11 +121,12 @@ int main() {
     );
 
     /* Printing nc2048 logo */
-    mvprintw(0, LOGO_POS_X, "                mmmm   mmmm     mm   mmmm ");
-    mvprintw(1, LOGO_POS_X, " m mm    mmm   \"   \"# m\"  \"m   m\"#  #    #");
-    mvprintw(2, LOGO_POS_X, " #\"  #  #\"  \"      m\" #  m #  #\" #  \"mmmm\"");
-    mvprintw(3, LOGO_POS_X, " #   #  #        m\"   #    # #mmm#m #   \"#");
-    mvprintw(4, LOGO_POS_X, " #   #  \"#mm\"  m#mmmm  #mm#      #  \"#mmm\"");
+    mvprintw(0, LOGO_POS_X, "               mmmm   mmmm     mm   mmmm ");
+    mvprintw(1, LOGO_POS_X, "m mm    mmm   \"   \"# m\"  \"m   m\"#  #    #");
+    mvprintw(2, LOGO_POS_X, "#\"  #  #\"  \"      m\" #  m #  #\" #  \"mmmm\"");
+    mvprintw(3, LOGO_POS_X, "#   #  #        m\"   #    # #mmm#m #   \"#");
+    mvprintw(4, LOGO_POS_X, "#   #  \"#mm\"  m#mmmm  #mm#      #  \"#mmm\"");
+    mvprintw(5, LOGO_POS_X, "            Press 'Q' to exit.");
     refresh();
 
     drawField(field);
@@ -244,7 +245,7 @@ void handleInput(int charCode) {
         }
 
         populateRandomBlock(field);
-        
+
         /* Handle losing condition - 'Are all the blocks on the field taken?'*/
         if (isFieldFull(field) == true) {
             if (isFieldMovable(field) == false) {
