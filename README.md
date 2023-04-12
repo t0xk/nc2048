@@ -17,9 +17,8 @@ in a Terminal. The project was tested on Ubuntu 22.10 and Ubuntu for WSL2.
 #### Building the project
 
 ```shell
-mkdir nc2048 && cd nc2048
-git init
-git pull https://github.com/t0xk/nc2048.git
+git clone https://github.com/t0xk/nc2048.git
+cd nc2048
 cmake -S . -B build
 cd build
 make
